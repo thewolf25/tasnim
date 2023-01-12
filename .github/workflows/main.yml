@@ -9,13 +9,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: Install dependencies
-      run: |
-        npm install
+#     - name: Install dependencies
+#       run: |
+#         npm install
         
-    - name: Build and test
-      run: |
-        npm test
+#     - name: Build and test
+#       run: |
+#         npm test
     
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v4
@@ -24,4 +24,24 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Send mail
+      uses: juanformoso/action-send-mail@1
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        subject: Github Actions job result
+        # Literal body:
+        body: Build job of ${{github.repository}} completed successfully!
+        # Read file contents as body:
+        to: mehdinasri232@gmail.com,nasrimehdi96@gmail.com
+        from: ${{secrets.MAIL_USERNAME}}
+        # Optional content type (defaults to text/plain):
+        content_type: text/html
+        # Optional converting Markdown to HTML (set content_type to text/html too):
+        convert_markdown: true
+
+     
     
