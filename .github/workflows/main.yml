@@ -8,15 +8,15 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+#   install all the dependencies     
     - name: Install dependencies
       run: |
         npm install
-        
-    - name: Build and test
+#     launch the unit testing 
+    - name: Test the code
       run: |
         npm test
-    
+#     build and deploy the new version of the image
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
@@ -24,7 +24,7 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        
+#    Notify all the team for the new version     
     - name: Send mail
       uses: juanformoso/action-send-mail@1
       with:
