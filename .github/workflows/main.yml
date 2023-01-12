@@ -13,5 +13,5 @@ jobs:
         # Build the Docker container
         docker build -t my-react-app .
         echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
-        docker tag my-react-app ${{ secrets.DOCKER_HUB_USERNAME }}/my-react-app:latest
-        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/my-react-app:latest
+        docker tag tasnim ${{ secrets.DOCKER_HUB_USERNAME }}/my-react-app:latest
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/tasnim:latest
